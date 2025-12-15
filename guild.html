@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayush | Modern Portfolio</title>
+
+  <!-- Favicon (no download) -->
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+  <rect width='100' height='100' rx='22' fill='%236366f1'/>
+  <text x='50' y='68' font-size='52' fill='white' text-anchor='middle' font-family='Arial' font-weight='700'>A</text>
+  </svg>" />
+
+  <!-- Bootstrap -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Font -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #0f172a;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #6366f1;
+      --secondary: #22d3ee;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+    }
+
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15), transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(34, 211, 238, 0.12), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      backdrop-filter: blur(14px);
+      background: rgba(2, 6, 23, 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* BUTTONS */
+    .btn-main {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      padding: 14px 32px;
+      border-radius: 14px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .btn-outline-custom {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 32px;
+      border-radius: 14px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 110px 0;
+    }
+
+    /* GLASS CARD */
+    .glass {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      transition: all 0.35s ease;
+      height: 100%;
+    }
+
+    .glass:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 80px rgba(99, 102, 241, 0.25);
+    }
+
+    .project-img {
+      height: 220px;
+      object-fit: cover;
+      border-radius: 18px 18px 0 0;
+    }
+
+    /* TAG */
+    .tag {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #c7d2fe;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(2, 6, 23, 0.8);
+      color: var(--muted);
+      padding: 30px;
+      text-align: center;
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: 0.6s ease;
+    }
+
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .spinner {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 4px solid #1e293b;
+      border-top: 4px solid var(--primary);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .aa {
+      font-size: 30px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- LOADER -->
+
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Ayush</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto gap-4 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item" id="loginBtnNav"><button class="btn btn-outline-custom btn-sm" data-bs-toggle="modal"
+              data-bs-target="#loginModal">Login</button></li>
+          <li class="nav-item dropdown d-none" id="userNav">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="navUser"></a>
+            <ul class="dropdown-menu dropdown-menu-end bg-dark border-0">
+              <li><button class="dropdown-item text-light" onclick="logout()">Logout</button></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <div class="container text-center">
+      <span class="tag mb-4">Modern • Creative • Stylish</span>
+      <h1 class="mt-4">Hi, I'm <span class="gradient-text">Ayush</span></h1>
+      <p class="lead text-secondary col-lg-8 mx-auto mt-4">
+        I craft modern, clean and visually striking web experiences with a focus on design, motion and usability.
+      </p>
+      <div class="d-flex justify-content-center gap-3 mt-5">
+        <a href="#projects" class="btn btn-main">View Work</a>
+        <div class="btn btn-outline-custom" onclick="openProject('Guild')">See guild</a>
+        </div>
+      </div>
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">About Me</h2>
+      <p class="text-secondary col-lg-7 mx-auto">
+        I'm a developer who loves minimal design, smooth animations and building interfaces that feel premium, modern
+        and effortless to use.
+      </p>
+    </div>
+  </section>
+
+  <!-- LOGIN MODAL -->
+
+  <div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass p-4">
+        <h4 class="fw-bold mb-3 text-center">Member Login</h4>
+        <div class="mb-3">
+          <input id="loginUser" class="form-control bg-dark border-0 text-light" placeholder="Username">
+        </div>
+        <div class="mb-3">
+          <input id="loginPass" type="password" class="form-control bg-dark border-0 text-light" placeholder="Password">
+        </div>
+        <button class="btn btn-main w-100" onclick="login()">Login</button>
+        <p id="loginMsg" class="text-center mt-3 text-secondary"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <!-- PROJECT SEARCH -->
+  <div class="row mb-4">
+    <div class="col-lg-6 mx-auto">
+      <input type="text" id="projectSearch" class="form-control bg-dark border-0 text-light p-3"
+        placeholder="Search projects..." onkeyup="filterProjects()" style="border-radius:14px;">
+    </div>
+  </div>
+
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5">Selected Work</h2>
+      <div class="row g-4">
+
+        ```
+        <div class="col-md-4 project-item" data-title="anonymous_1" data-desc="hi everyone glad to see you here"
+          onclick="openProject('ANONYMOUS_1')" style="cursor:pointer">
+
+          <div class="glass">
+            <img src="images/ANONYMOUS.pic.jpg" class="project-img w-100" />
+            <div class="p-4">
+              <h5>ANONYMOUS_1</h5>
+              <p class="text-secondary">Hi Everyone! Glad to see you here.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 project-item" data-title="voltrac" data-desc="hi everyone i am voltrac"
+          onclick="openProject('Voltrac')" style="cursor:pointer">
+
+          <div class="glass">
+            <img src="images/Voltrac.pic.jpg" class="project-img w-100" />
+            <div class="p-4">
+              <h5>Voltrac</h5>
+              <p class="text-secondary">Hi Everyone! I am Voltrac.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 project-item" data-title="web concept" data-desc="modern landing page experiment"
+          onclick="openProject('project3')" style="cursor:pointer">
+
+          <div class="glass">
+            <img src="images/man2.jpeg" class="project-img w-100" />
+            <div class="p-4">
+              <h5>Web Concept</h5>
+              <p class="text-secondary">Modern landing page experiment.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      ```
+
+    </div>
+  </section>
+<a href="https://ayush-ascapdx.github.io/weather/" class="aa"target="_blank"> go to google</a>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">Let's Connect</h2>
+      <p class="text-secondary">ID: <br>UID:</p>
+    </div>
+  </section>
+
+  <footer>© 2025 Ayush — Modern Web Portfolio</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loader').classList.add('hide'), 1200)
+      checkLogin()
+    })
+
+    function login() {
+      const u = document.getElementById('loginUser').value
+      const p = document.getElementById('loginPass').value
+
+      if (u === 'admin' && p === '1234') {
+        localStorage.setItem('loggedIn', 'true')
+        localStorage.setItem('username', u)
+        document.getElementById('loginMsg').innerText = 'Login successful'
+        setTimeout(() => location.reload(), 600)
+      } else {
+        document.getElementById('loginMsg').innerText = 'Invalid credentials'
+      }
+    }
+
+    function logout() {
+      localStorage.clear()
+      location.reload()
+    }
+
+    function checkLogin() {
+      const logged = localStorage.getItem('loggedIn') === 'true'
+      const user = localStorage.getItem('username')
+
+      if (logged) {
+
+        document.getElementById('loginBtnNav').classList.add('d-none')
+        document.getElementById('userNav').classList.remove('d-none')
+        document.getElementById('navUser').innerText = user
+        document.getElementById('projects').classList.remove('d-none')
+      } else {
+        document.getElementById('projects').classList.add('d-none')
+      }
+    }
+
+    function openProject(id) {
+      window.location.href = `project.html?id=${id}`
+    }
+  </script>
+<script>
+function filterProjects(){
+  const input = document.getElementById("projectSearch").value.toLowerCase()
+  const projects = document.querySelectorAll(".project-item")
+
+  projects.forEach(project => {
+    const title = project.dataset.title.toLowerCase()
+    const desc  = project.dataset.desc.toLowerCase()
+
+    if(title.includes(input) || desc.includes(input)){
+      project.classList.remove("d-none")
+    } else {
+      project.classList.add("d-none")
+    }
+  })
+}
+</script>
+
+
+</body>
+
+</html>
