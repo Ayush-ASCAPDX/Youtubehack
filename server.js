@@ -15,7 +15,7 @@ const io = new Server(server);
 
 const JWT_SECRET = process.env.JWT_SECRET || "change_this_secret";
 
-mongoose.connect("mongodb://127.0.0.1:27017/chatapp")
+mongoose.connect("mongodb+srv://Ascapdx:Ascapdx111@chatapp.iibwiwx.mongodb.net/chatapp1")
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
